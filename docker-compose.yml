@@ -1,0 +1,12 @@
+version: "3"
+services:
+  alpine:
+    build: ./alpine
+    ports:
+      - "8000:8000"
+    container_name: memoapp
+    volumes:
+      - ./:/memoapp
+    tty: true
+    restart: always
+
