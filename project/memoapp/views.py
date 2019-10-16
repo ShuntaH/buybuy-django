@@ -51,6 +51,24 @@ def update(request, pk):
     return render(request, 'memoapp/day_form.html', context)
 
 
+def delete(request, pk):
+    day = get_object_or_404(Day, pk=pk)
+
+    if request.method == 'POST':
+        day.delete()
+        return redirect('memoapp:index')
 
 
+    context = {
+        'day': day,
+    }
+    return render(request, 'memoapp/day_confirm_delete.html', context)
 
+
+def detail(request, pk):
+    day = get_object_or_404(Day, pk=pk)
+
+    context = {
+        'day': day,
+    }
+    return render(request, 'memoapp/day_detail.html', context)

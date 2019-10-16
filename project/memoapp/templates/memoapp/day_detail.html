@@ -1,0 +1,19 @@
+{% extends 'memoapp/base.html' %}
+
+
+{% block content %}
+<table class="table">
+    <tr>
+        <th>title</th>
+        <td>{{ day.title }}</td>
+    </tr>
+    <tr>
+        <th>main</th>
+        <td>{{ day.text | linebreaksbr}}</td>
+    </tr>
+    <tr>
+        <th>date</th>
+        <td>{{ day.date }}</td>
+    </tr>
+</table>
+{% endblock %}
