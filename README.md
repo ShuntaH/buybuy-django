@@ -1,4 +1,4 @@
-# memoapp-django
+# BuyBuy-django
 TO-BUY LIST APP
 ---
 * Alpine 3.7
