@@ -4,18 +4,18 @@
     <table class="table">
         <thead>
         <tr>
-            <th>title</th>
-            <th>date</th>
+            <th>Title</th>
             <th></th>
+            <th>Created</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         {% for day in day_list %}
             <tr>
-                <td>{{ day.title }} <a href="{% url 'memoapp:detail' day.pk %}">detail</a></td>
+                <td>{{ day.title }}</td>
+                <td><a href="{% url 'memoapp:detail' day.pk %}">detail</a></td>
                 <td>{{ day.date }}</td>
-                <td><a href="{% url 'memoapp:update' day.pk %}">edit</a></td>
                 <td><a href="{% url 'memoapp:delete' day.pk %}">delete</a></td>
             </tr>
         {% endfor %}

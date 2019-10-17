@@ -4,16 +4,17 @@
 {% block content %}
     <table class="table">
         <tr>
-            <th>title</th>
+            <th>Items</th>
             <td>{{ day.title }}</td>
         </tr>
         <tr>
-            <th>main</th>
+            <th>memo</th>
             <td>{{ day.text | linebreaksbr }}</td>
         </tr>
         <tr>
-            <th>date</th>
+            <th>created</th>
             <td>{{ day.date }}</td>
         </tr>
     </table>
+    <button type="button" class="btn btn-outline-primary"><a href="{% url 'memoapp:update' day.pk %}">edit</a></button>
 {% endblock %}

@@ -2,21 +2,21 @@
 
 {% block content %}
     <form action="" method="POST">
-        <table class="table">
-            <tr>
-                <th>title</th>
-                <td>{{ form.title }}</td>
-            </tr>
-            <tr>
-                <th>main</th>
-                <td>{{ form.text }}</td>
-            </tr>
-            <tr>
-                <th>date</th>
-                <td>{{ form.date }}</td>
-            </tr>
-        </table>
-        <button type="submit" class="btn btn-primary">Post</button>
+        <div>
+            <div class="form-item border border-right-0 border-left-0 border-secondary py-2 mt-3">
+                <h6>Item</h6>
+                {{ form.title }}
+            </div>
+            <div class="form-des border border-top-0 border-right-0 border-left-0 border-secondary py-2">
+                <h6>Description</h6>
+                {{ form.text }}
+            </div>
+            <div class="form-date border border-top-0 border-right-0 border-left-0 border-secondary py-2 mb-3">
+                <h6>now</h6>
+                {{ form.date }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-warning">Want</button>
         {% csrf_token %}
     </form>
 {% endblock %}
