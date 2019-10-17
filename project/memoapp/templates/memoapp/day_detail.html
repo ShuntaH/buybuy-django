@@ -2,19 +2,24 @@
 
 
 {% block content %}
+    <h4 class="text-center text-dark mb-2 font-weight-light font-italic">Overview</h4>
     <table class="table">
         <tr>
             <th>Items</th>
             <td>{{ day.title }}</td>
         </tr>
         <tr>
-            <th>memo</th>
+            <th>Memo</th>
             <td>{{ day.text | linebreaksbr }}</td>
         </tr>
         <tr>
-            <th>created</th>
+            <th>Created</th>
             <td>{{ day.date }}</td>
         </tr>
     </table>
-    <button type="button" class="btn btn-outline-primary"><a href="{% url 'memoapp:update' day.pk %}">edit</a></button>
+    <div class="d-flex justify-content-center py-3">
+       <a href="{% url 'memoapp:update' day.pk %}"><button type="button" class="btn btn-outline-primary">Change Your Mind
+        </button></a>
+    </div>
+
 {% endblock %}
