@@ -1,16 +1,21 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
+from django.views import generic
+from django.contrib import messages
+
 from .forms import DayCreateForm
 from .models import Day
+
 # Create your views here.
 
 
+'''function
 def index(request):
     context = {
         'day_list': Day.objects.all(),
     }
     return render(request, 'memoapp/day_list.html', context)
-
-
+    
+    
 def add(request):
     # context = {
     #     'form': DayCreateForm()
@@ -30,8 +35,8 @@ def add(request):
         'form': form
     }
     return render(request, 'memoapp/day_form.html', context)
-
-
+    
+    
 def update(request, pk):
     # urlのpkをもとに、Dayを取得
     day = get_object_or_404(Day, pk=pk)
@@ -48,7 +53,7 @@ def update(request, pk):
     context = {
         'form': form
     }
-    return render(request, 'memoapp/day_form.html', context)
+    return render(request, 'memoapp/day_form.html', context)    
 
 
 def delete(request, pk):
@@ -72,3 +77,49 @@ def detail(request, pk):
         'day': day,
     }
     return render(request, 'memoapp/day_detail.html', context)
+
+'''
+
+
+class IndexView(generic.ListView):
+    model = Day
+    paginate_by = 5
+
+
+class AddView(generic.CreateView):
+    model = Day
+    form_class = DayCreateForm
+
+    # 単純なフォームだったらform_classはいらなくてこれでok
+    # fields = '__all__'
+
+    # redirect()はhttp response objectを返す関数
+    # reverse_lazy()は文字列を返す関数
+    success_url = reverse_lazy('memoapp:index')
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        messages.success(
+            self.request, '"{}" is created'.format(form.instance))
+        return result
+
+
+class UpdateView(generic.UpdateView):
+    model = Day
+    form_class = DayCreateForm
+    success_url = reverse_lazy('memoapp:index')
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        messages.success(
+            self.request, '"{}" is updated'.format(form.instance))
+        return result
+
+
+class DeleteView(generic.DeleteView):
+    model = Day
+    success_url = reverse_lazy('memoapp:index')
+
+
+class DetailView(generic.DetailView):
+    model = Day

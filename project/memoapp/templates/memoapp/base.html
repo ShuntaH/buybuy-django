@@ -13,9 +13,35 @@
 </head>
 <body>
 <div class="container">
-    <nav class="nav">
-        <a class="nav-link" href="{% url 'memoapp:index' %}">MemoList</a>
-        <a class="nav-link" href="{% url 'memoapp:add' %}">AddMemo</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'memoapp:index' %}"> MemoList <span
+                class="sr-only">(current)</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'memoapp:add' %}">Add Memo</a>
+                </li>
+                {% if user.is_authenticated %}
+{#                    if already login, logout shows and move to signin#}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'memoapp:add' %}">Switch accounts</a>
+                    </li>
+                    {% else %}
+{#                    if not login, signin and signout show#}
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'memoapp:add' %}">Sign up</a>
+                </li>
+                      <li class="nav-item">
+                    <a class="nav-link" href="{% url 'memoapp:add' %}">Sign in</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
     </nav>
 
     {% block content %}

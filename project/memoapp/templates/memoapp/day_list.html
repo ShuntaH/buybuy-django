@@ -1,27 +1,39 @@
 {% extends 'memoapp/base.html' %}
 
-{%  block content %}
-    <h1>memo list</h1>
+{% block content %}
     <table class="table">
         <thead>
-            <tr>
-                <th>title</th>
-                <th>date</th>
-                <th></th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>Title</th>
+            <th></th>
+            <th>Created</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
         {% for day in day_list %}
-        <tr>
-            <td>{{ day.title }} <a href="{% url 'memoapp:detail' day.pk %}">detail</a></td>
-            <td>{{ day.date }}</td>
-            <td><a href="{% url 'memoapp:update' day.pk %}">edit</a></td>
-            <td><a href="{% url 'memoapp:delete' day.pk %}">delete</a></td>
-        </tr>
+            <tr>
+                <td>{{ day.title }}</td>
+                <td><a href="{% url 'memoapp:detail' day.pk %}">detail</a></td>
+                <td>{{ day.date }}</td>
+                <td><a href="{% url 'memoapp:delete' day.pk %}">delete</a></td>
+            </tr>
         {% endfor %}
         </tbody>
     </table>
 
-
+    <nav aria-label="...">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item active">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Pre</a>
+                </li>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <li class="page-item active">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
 {% endblock %}
