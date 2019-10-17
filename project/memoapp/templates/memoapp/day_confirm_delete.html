@@ -17,8 +17,11 @@
                 <td>{{ day.date }}</td>
             </tr>
         </table>
-        <p>delete this data</p>
-        <button type="submit" class="btn btn-outline-primary">Out Of Yur Mind</button>
-        {% csrf_token %}
+
     </form>
+    <div class="d-flex flex-column justify-content-center">
+        <p class="pt-3">Clear what you want ...</p>
+        <button type="submit" class="btn btn-outline-primary">Out Of Your Mind</button>
+        {% csrf_token %}
+    </div>
 {% endblock %}
