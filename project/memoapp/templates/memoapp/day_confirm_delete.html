@@ -2,23 +2,27 @@
 
 
 {% block content %}
+    <h4 class="text-center text-dark mb-2 font-weight-light font-italic">Clear</h4>
     <form action="" method="POST">
         <table class="table">
             <tr>
-                <th>title</th>
+                <th>Items</th>
                 <td>{{ day.title }}</td>
             </tr>
             <tr>
-                <th>main</th>
+                <th>Memo</th>
                 <td>{{ day.text }}</td>
             </tr>
             <tr>
-                <th>date</th>
+                <th>Created</th>
                 <td>{{ day.date }}</td>
             </tr>
         </table>
-        <p>delete this data</p>
-        <button type="submit" class="btn btn-primary">SEND</button>
-        {% csrf_token %}
+
     </form>
+    <div class="d-flex flex-column justify-content-center">
+        <p class="pt-3">Clear what you want ...</p>
+        <button type="submit" class="btn btn-outline-primary">Out Of Your Mind</button>
+        {% csrf_token %}
+    </div>
 {% endblock %}

@@ -1,5 +1,7 @@
 <!doctype html>
 <html lang="en">
+
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -8,13 +10,18 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/52921740c1.js" crossorigin="anonymous"></script>
 
-    <title>memoapp</title>
+    <title>BuyBuy</title>
 </head>
+
+
 <body>
+
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">memo list</a>
+        <a class="navbar-brand" href="{% url 'memoapp:index' %}"> BuyBuy <span
+                class="sr-only">(current)</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -23,18 +30,34 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'memoapp:index' %}"> List <span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{% url 'memoapp:add' %}">Add Memo</a>
                 </li>
+                {% if user.is_authenticated %}
+                    {#                    if already login, logout shows and move to signin#}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'memoapp:add' %}">Switch accounts</a>
+                    </li>
+                {% else %}
+                    {#                    if not login, signin and signout show#}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'memoapp:add' %}">Sign up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'memoapp:add' %}">Sign in</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
 
-    {% block content %}
-    {% endblock %}
+    <div class="px-2 my-5">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="fixed-bottom bg-light">
+        <p class="text-center my-2">BuyBuy@shunta.h</p>
+    </footer>
 </div>
 
 
