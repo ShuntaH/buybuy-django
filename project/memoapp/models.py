@@ -6,6 +6,6 @@ from django.utils import timezone
 
 
 class Day(models.Model):
-    title = models.CharField('title', max_length=200)
-    text = models.TextField('memo', blank=True)
-    date = models.DateTimeField('created', default=timezone.now)
+    title = models.CharField('Want ...', max_length=200)
+    text = models.TextField('Description', blank=True)
+    date = models.DateTimeField('When you hit it on...', default=timezone.now)
