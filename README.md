@@ -19,3 +19,4 @@ python manage.py runserver 0.0.0.0:8000
 ```
 ---
 ## Setup Pycharm 
+setup interpreter and run configuration
