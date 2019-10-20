@@ -14,8 +14,11 @@ WORKDIR /memoapp
 ADD ./requirements.txt /memoapp
 
 # Install any needed packages specified in requirements.txt
+# Now Im not sure that what DB I use, so I will install some unnecessary things
 RUN apk add --no-cache --virtual .build-deps gcc musl-dev libffi-dev mariadb-dev\
  postgresql-dev  g++ libgcc libstdc++ libxml2-dev libxslt-dev jpeg-dev && pip install cython \
  && pip install -r requirements.txt
+
+ # Make alpine lighter
 RUN rm -rf /var/cache/apk/* && \
     rm -rf /tmp/*

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'project',
     'memoapp.apps.MemoappConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +121,5 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/memoapp/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 EMAIL_USE_TLS = True
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
