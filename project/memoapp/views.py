@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.views import generic
+from django.contrib import messages
 
 from .forms import DayCreateForm
 from .models import Day
@@ -82,7 +83,7 @@ def detail(request, pk):
 
 class IndexView(generic.ListView):
     model = Day
-    paginate_by = 3
+    paginate_by = 8
 
 
 class AddView(generic.CreateView):
@@ -96,12 +97,23 @@ class AddView(generic.CreateView):
     # reverse_lazy()は文字列を返す関数
     success_url = reverse_lazy('memoapp:index')
 
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        messages.success(
+            self.request, '"{}" is created'.format(form.instance))
+        return result
+
 
 class UpdateView(generic.UpdateView):
     model = Day
     form_class = DayCreateForm
     success_url = reverse_lazy('memoapp:index')
 
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        messages.success(
+            self.request, '"{}" is updated'.format(form.instance))
+        return result
 
 
 class DeleteView(generic.DeleteView):

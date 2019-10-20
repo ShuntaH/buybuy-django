@@ -1,22 +1,14 @@
 {% extends 'memoapp/base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
-    <form action="" method="POST">
-        <table class="table">
-            <tr>
-                <th>title</th>
-                <td>{{ form.title }}</td>
-            </tr>
-            <tr>
-                <th>main</th>
-                <td>{{ form.text }}</td>
-            </tr>
-            <tr>
-                <th>date</th>
-                <td>{{ form.date }}</td>
-            </tr>
-        </table>
-        <button type="submit" class="btn btn-primary">Post</button>
-        {% csrf_token %}
+    <h4 class="text-center text-dark mb-2 font-weight-light font-italic">Write</h4>
+    <form action="" method="post">
+        {{ form|crispy }}
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-outline-warning px-5 my-3">Save</button>
+            {% csrf_token %}
+        </div>
     </form>
 {% endblock %}

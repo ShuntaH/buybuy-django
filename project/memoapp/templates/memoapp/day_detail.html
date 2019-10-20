@@ -1,19 +1,24 @@
 {% extends 'memoapp/base.html' %}
 
-
 {% block content %}
+    <h4 class="text-center text-dark mb-4 font-weight-light font-italic">Overview</h4>
     <table class="table">
         <tr>
-            <th>title</th>
+            <th>Items</th>
             <td>{{ day.title }}</td>
         </tr>
         <tr>
-            <th>main</th>
+            <th>Memo</th>
             <td>{{ day.text | linebreaksbr }}</td>
         </tr>
         <tr>
-            <th>date</th>
+            <th>Created</th>
             <td>{{ day.date }}</td>
         </tr>
     </table>
+    <div class="d-flex justify-content-center py-3">
+       <a href="{% url 'memoapp:update' day.pk %}"><button type="button" class="btn btn-outline-primary">Change Your Mind
+        </button></a>
+    </div>
+
 {% endblock %}

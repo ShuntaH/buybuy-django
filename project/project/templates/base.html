@@ -1,11 +1,10 @@
 {% load staticfiles %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -13,13 +12,10 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/4b64efcbfb.js" crossorigin="anonymous"></script>
-    <title>BuyBuy</title>
+    <title>}BuyBuy</title>
 </head>
-
-
 <body>
-<div class="header px-3">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
         <a class="navbar-brand" href="{% url 'memoapp:index' %}"> BuyBuy <span
                 class="sr-only">(current)</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -29,35 +25,32 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'memoapp:add' %}">Add Memo</a>
-                </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+                        <a class="nav-link logout" href="{% url 'logout' %}">Sign out</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link signup" href="{% url 'accounts:signup' %}">Sign up</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Sign in</a>
+                        <a class="nav-link signup" href="{% url 'accounts:signup' %}">Sign up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+                        <a class="nav-link login" href="{% url 'login' %}">Sign in</a>
                     </li>
                 {% endif %}
             </ul>
         </div>
     </nav>
-</div>
 
-
-<div class="main-container container">
-    <div class="px-2 pt-5">
+<div class="container">
+    <div class="px-2 py-5">
         {% block content %}
         {% endblock %}
     </div>
 </div>
-
-<footer class="bg-light py-4">
+<footer class="bg-light py-4 mt-3">
     <p class="text-center text-secondary">BuyBuy@shunta.h</p>
 </footer>
 

@@ -1,39 +1,35 @@
 {% extends 'memoapp/base.html' %}
 
 {% block content %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>title</th>
-            <th>date</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for day in day_list %}
-            <tr>
-                <td>{{ day.title }} <a href="{% url 'memoapp:detail' day.pk %}">detail</a></td>
-                <td>{{ day.date }}</td>
-                <td><a href="{% url 'memoapp:update' day.pk %}">edit</a></td>
-                <td><a href="{% url 'memoapp:delete' day.pk %}">delete</a></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <nav aria-label="...">
-        <ul class="pagination">
-            {% if page_obj.has_previous %}
-                <li class="page-item active">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Pre</a>
-                </li>
-            {% endif %}
-            {% if page_obj.has_next %}
-                <li class="page-item active">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
+    <h4 class="text-center text-dark mb-2 font-weight-light font-italic">List</h4>
+    {% for day in day_list %}
+        <div class="d-flex justify-content-between border border-top-0 border-left-0 border-right-0 pb-2 mb-3">
+            <div>
+                <a class="text-dark" href="{% url 'memoapp:detail' day.pk %}">{{ day.title }}</a>
+            </div>
+            <div>
+                <a href="{% url 'memoapp:update' day.pk %}"><i class="far fa-edit"></i></a>
+                &ensp;
+                <a href="{% url 'memoapp:delete' day.pk %}"><i class="fas fa-trash"></i></a>
+            </div>
+        </div>
+    {% endfor %}
+    <div>
+        <nav aria-label="pagination" class="mt5">
+            <ul class="pagination" style="position: relative;">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"
+                        style="position: absolute; top: 50%; left:50%; transform: translate(-50%, -50%);">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Back</a>
+                    </li>
+                {% endif %}
+                {% if page_obj.has_next %}
+                    <li class="page-item"
+                        style="position: absolute; top: 50%; left:50%; transform: translate(-50%, -50%);">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 {% endblock %}
