@@ -5,7 +5,7 @@
 {% block content %}
     <h4 class="text-center text-dark mb-2 font-weight-light font-italic">Write</h4>
     <form action="" method="post">
-        {{ form| crispy }}
+        {{ form|crispy }}
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-outline-warning px-5 my-3">Save</button>
             {% csrf_token %}

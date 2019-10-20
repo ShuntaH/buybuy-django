@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'project',
+    'accounts.apps.AccountsConfig',
     'memoapp.apps.MemoappConfig',
     'crispy_forms',
 ]
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,7 +119,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/memoapp/'
+LOGIN_REDIRECT_URL = '/buybuy/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 EMAIL_USE_TLS = True
 

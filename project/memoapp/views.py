@@ -83,7 +83,7 @@ def detail(request, pk):
 
 class IndexView(generic.ListView):
     model = Day
-    paginate_by = 5
+    paginate_by = 8
 
 
 class AddView(generic.CreateView):
