@@ -1,7 +1,7 @@
 # BuyBuy-django
 TO-BUY LIST APP
 ---
-* Alpine 3.7
+* Alpine
 * Python3.7
 * Django2.2
 * PyCharm
@@ -9,6 +9,8 @@ TO-BUY LIST APP
 
 ## Setup
 ```
+git clone ----
+
 docker-compose up -d --build
 
 docker exec -it alpine bin/ash/
@@ -18,5 +20,5 @@ python manage.py runserver 0.0.0.0:8000
 
 ```
 ---
-## Setup Pycharm 
+## Setup Pycharm
 setup interpreter and run configuration
