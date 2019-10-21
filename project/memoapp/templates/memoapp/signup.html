@@ -1,11 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'memoapp/base_authentication.html' %}
 
 {% load crispy_forms_tags %}
 
 {% block content %}
     <h1 class="text-center">Signup</h1>
-    <form method="post">
-
+    <form action="" method="post">
         {{ form|crispy }}
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-primary mt-5">Sign up</button>

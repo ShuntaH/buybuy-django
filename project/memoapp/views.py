@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 
 from .forms import DayCreateForm
 from .models import Day
@@ -123,3 +124,10 @@ class DeleteView(generic.DeleteView):
 
 class DetailView(generic.DetailView):
     model = Day
+
+
+class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('memoapp:signin')
+    template_name = 'memoapp/signup.html'
+
