@@ -1,0 +1,10 @@
+{% extends 'memoapp/base_authentication.html' %}
+
+{% block content %}
+    <h1 class="text-center pb-4">Signed Out</h1>
+    <p class="text-center">Thanks for spending some quality time with the Web site today.</p>
+    <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-outline-primary mx-4 mt-5" onclick="location.href='{% url 'memoapp:signup' %}'">Sign up again</button>
+    <button type="button" class="btn btn-outline-success mx-4 mt-5" onclick="location.href='{% url 'memoapp:signin' %}'">Sign in again</button>
+    </div>
+{% endblock %}

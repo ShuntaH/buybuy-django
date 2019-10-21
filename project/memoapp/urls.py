@@ -1,16 +1,10 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
 
 from . import views
 
 app_name = 'memoapp'
 
-'''
-    path('', views.index, name='index'),
-    path('add/', views.add, name='add'),
-    path('update/<int:pk>', views.update, name='update'),
-    path('delete/<int:pk>/', views.delete, name='delete'),
-    path('detail/<int:pk>', views.detail, name='detail'),
-'''
 urlpatterns = [
 
     path('', views.IndexView.as_view(), name='index'),
@@ -18,5 +12,7 @@ urlpatterns = [
     path('update/<int:pk>/', views.UpdateView.as_view(), name='update'),
     path('delete/<int:pk>/', views.DeleteView.as_view(), name='delete'),
     path('detail/<int:pk>', views.DetailView.as_view(), name='detail'),
-
+    path('signin/', auth_views.LoginView.as_view(template_name='memoapp/signin.html'), name='signin'),
+    path('signout/', auth_views.LogoutView.as_view(template_name='memoapp/signout.html'), name='signout'),
+    path('signup/', views.SignUpView.as_view(), name='signup'),
 ]
