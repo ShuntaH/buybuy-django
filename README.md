@@ -20,5 +20,5 @@ python manage.py runserver 0.0.0.0:8000
 
 ```
 ---
-## Setup Pycharm
+## Setup PyCharm
 setup interpreter and run configuration
