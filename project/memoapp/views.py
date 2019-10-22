@@ -2,11 +2,73 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 
 from .forms import DayCreateForm
 from .models import Day
 
 # Create your views here.
+
+
+class IndexView(LoginRequiredMixin, generic.ListView):
+    model = Day
+    paginate_by = 8
+    login_url = '/buybuy/signin/'
+
+
+class AddView(LoginRequiredMixin, generic.CreateView):
+    model = Day
+    form_class = DayCreateForm
+    login_url = '/buybuy/signin/'
+
+    # 単純なフォームだったらform_classはいらなくてこれでok
+    # fields = '__all__'
+
+    # redirect()はhttp response objectを返す関数
+    # reverse_lazy()は文字列を返す関数
+    success_url = reverse_lazy('memoapp:index')
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        messages.success(
+            self.request, '"{}" is created'.format(form.instance))
+        return result
+
+
+class UpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Day
+    form_class = DayCreateForm
+    login_url = '/buybuy/signin/'
+    success_url = reverse_lazy('memoapp:index')
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        messages.success(
+            self.request, '"{}" is updated'.format(form.instance))
+        return result
+
+
+class DeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Day
+    login_url = '/buybuy/signin/'
+    success_url = reverse_lazy('memoapp:index')
+
+
+class DetailView(LoginRequiredMixin, generic.DetailView):
+    model = Day
+    login_url = '/buybuy/signin/'
+
+
+class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('memoapp:signin')
+    template_name = 'memoapp/signup.html'
+
+
+# class ProfileView(generic.TemplateView):
+#     model = User
+#     template_name = 'memoapp/base.html'
 
 
 '''function
@@ -15,8 +77,8 @@ def index(request):
         'day_list': Day.objects.all(),
     }
     return render(request, 'memoapp/day_list.html', context)
-    
-    
+
+
 def add(request):
     # context = {
     #     'form': DayCreateForm()
@@ -36,8 +98,8 @@ def add(request):
         'form': form
     }
     return render(request, 'memoapp/day_form.html', context)
-    
-    
+
+
 def update(request, pk):
     # urlのpkをもとに、Dayを取得
     day = get_object_or_404(Day, pk=pk)
@@ -80,54 +142,3 @@ def detail(request, pk):
     return render(request, 'memoapp/day_detail.html', context)
 
 '''
-
-
-class IndexView(generic.ListView):
-    model = Day
-    paginate_by = 8
-
-
-class AddView(generic.CreateView):
-    model = Day
-    form_class = DayCreateForm
-
-    # 単純なフォームだったらform_classはいらなくてこれでok
-    # fields = '__all__'
-
-    # redirect()はhttp response objectを返す関数
-    # reverse_lazy()は文字列を返す関数
-    success_url = reverse_lazy('memoapp:index')
-
-    def form_valid(self, form):
-        result = super().form_valid(form)
-        messages.success(
-            self.request, '"{}" is created'.format(form.instance))
-        return result
-
-
-class UpdateView(generic.UpdateView):
-    model = Day
-    form_class = DayCreateForm
-    success_url = reverse_lazy('memoapp:index')
-
-    def form_valid(self, form):
-        result = super().form_valid(form)
-        messages.success(
-            self.request, '"{}" is updated'.format(form.instance))
-        return result
-
-
-class DeleteView(generic.DeleteView):
-    model = Day
-    success_url = reverse_lazy('memoapp:index')
-
-
-class DetailView(generic.DetailView):
-    model = Day
-
-
-class SignUpView(generic.CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('memoapp:signin')
-    template_name = 'memoapp/signup.html'
-

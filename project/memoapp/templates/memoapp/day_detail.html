@@ -4,7 +4,7 @@
     <h4 class="text-center text-dark mb-4 font-weight-light font-italic">Overview</h4>
     <table class="table">
         <tr>
-            <th>Items</th>
+            <th>What on your mind is</th>
             <td>{{ day.title }}</td>
         </tr>
         <tr>
@@ -17,8 +17,11 @@
         </tr>
     </table>
     <div class="d-flex justify-content-center py-3">
-       <a href="{% url 'memoapp:update' day.pk %}"><button type="button" class="btn btn-outline-primary">Change Your Mind
-        </button></a>
+        <a href="{% url 'memoapp:update' day.pk %}">
+            <button type="button" class="btn btn-outline-primary">
+                Change Your Mind
+            </button>
+        </a>
     </div>
 
 {% endblock %}
