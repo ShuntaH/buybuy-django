@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib import messages
@@ -8,6 +9,7 @@ from django.contrib.auth.models import User
 from .forms import DayCreateForm
 from .models import Day
 
+
 # Create your views here.
 
 
@@ -16,10 +18,14 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     paginate_by = 8
     login_url = '/buybuy/signin/'
 
+    def get_queryset(self):
+        return Day.objects.filter(user=self.request.user)
+
 
 class AddView(LoginRequiredMixin, generic.CreateView):
     model = Day
     form_class = DayCreateForm
+    # fields = '__all__'
     login_url = '/buybuy/signin/'
 
     # 単純なフォームだったらform_classはいらなくてこれでok
@@ -29,11 +35,8 @@ class AddView(LoginRequiredMixin, generic.CreateView):
     # reverse_lazy()は文字列を返す関数
     success_url = reverse_lazy('memoapp:index')
 
-    def form_valid(self, form):
-        result = super().form_valid(form)
-        messages.success(
-            self.request, '"{}" is created'.format(form.instance))
-        return result
+    # def get_queryset(self):
+    #     return Day.objects.filter(user=self.request.user)
 
 
 class UpdateView(LoginRequiredMixin, generic.UpdateView):
