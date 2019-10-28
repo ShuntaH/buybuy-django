@@ -1,0 +1,22 @@
+{% if day_list %}
+    <nav aria-label="pagination" class="mt-5">
+        <ul class="pagination" style="position: relative;">
+            {% if page_obj.has_previous %}
+                <li class="page-item"
+                    style="position: absolute; top: 50%; left:50%; transform: translate(-50%, -50%);">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Back</a>
+                </li>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <li class="page-item"
+                    style="position: absolute; top: 50%; left:50%; transform: translate(-50%, -50%);">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% else %}
+    <p class="mt-5 text-center">Sorry, I can't show what you want.This is because there are still not any your
+        desire. <br/>
+        Please add your desire first</p>
+{% endif %}
