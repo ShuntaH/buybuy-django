@@ -1,10 +1,8 @@
-from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy
-from django.views import generic
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
+from django.urls import reverse_lazy
+from django.views import generic
 
 from .forms import DayCreateForm
 from .models import Day
@@ -37,6 +35,10 @@ class AddView(LoginRequiredMixin, generic.CreateView):
 
     # def get_queryset(self):
     #     return Day.objects.filter(user=self.request.user)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class UpdateView(LoginRequiredMixin, generic.UpdateView):
