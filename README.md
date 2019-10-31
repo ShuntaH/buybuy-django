@@ -1,5 +1,5 @@
-# BuyBuy-django
-TO-BUY LIST APP
+# BuyBuy
+TO-BUY LIST APP by Django
 
 ## Requirements
 * Python3.7
