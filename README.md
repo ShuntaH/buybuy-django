@@ -1,15 +1,15 @@
 # BuyBuy-django
 TO-BUY LIST APP
----
-* Alpine
+
+## Requirements
 * Python3.7
 * Django2.2
-* PyCharm
----
+* Docker-compose
+* PyCharm Professinal
 
-## Setup
+## How to setup
 ```
-git clone ----
+git clone git@github.com:ShuntaH/buybuy-django.git
 
 docker-compose up -d --build
 
@@ -19,6 +19,25 @@ docker exec -it alpine bin/ash/
 python manage.py runserver 0.0.0.0:8000
 
 ```
----
-## Setup PyCharm
-setup interpreter and run configuration
+
+## PyCharm
+setup interpreter and run configuration  
+
+* Language & Framework -> Django
+
+* Mark Enable Django
+
+* Django Project Root -> project
+
+* Settings -> project/project/settings.py
+
+* Manage Script -> project/manage.py
+
+* Execution -> Docker
+
+* Run Configuration For Run and Debug -> Django Server
+
+## Library
+*  django-crispy-forms
+https://django-crispy-forms.readthedocs.io/en/latest/
+
