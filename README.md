@@ -40,4 +40,12 @@ setup interpreter and run configuration
 ## Library
 *  django-crispy-forms
 https://django-crispy-forms.readthedocs.io/en/latest/
+* Flake8(pycodestyle + pyflakes + mccabe)
+http://flake8.pycqa.org/en/latest/
+
+---
+after installing libraries...
+```
+$ pip freeze > requirements.txt
+```
 
