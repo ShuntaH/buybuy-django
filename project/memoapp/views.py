@@ -33,12 +33,11 @@ class AddView(LoginRequiredMixin, generic.CreateView):
     # reverse_lazy()は文字列を返す関数
     success_url = reverse_lazy('memoapp:index')
 
-    # def get_queryset(self):
-    #     return Day.objects.filter(user=self.request.user)
-
     def form_valid(self, form):
+        messages.success(self.request, 'Your  desire was added successfully')
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        return response
 
 
 class UpdateView(LoginRequiredMixin, generic.UpdateView):
@@ -48,16 +47,20 @@ class UpdateView(LoginRequiredMixin, generic.UpdateView):
     success_url = reverse_lazy('memoapp:index')
 
     def form_valid(self, form):
-        result = super().form_valid(form)
-        messages.success(
-            self.request, '"{}" is updated'.format(form.instance))
-        return result
+        response = super().form_valid(form)
+        messages.success(self.request, 'Your desire is updated')
+        return response
 
 
 class DeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Day
     login_url = '/buybuy/signin/'
     success_url = reverse_lazy('memoapp:index')
+
+    def delete(self, request, *args, **kwargs):
+        response = super().delete(self)
+        messages.success(self.request, 'Deleted successfully')
+        return response
 
 
 class DetailView(LoginRequiredMixin, generic.DetailView):
@@ -69,6 +72,11 @@ class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('memoapp:signin')
     template_name = 'memoapp/signup.html'
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(self)
+        messages.success(self.request, 'Your account was created successfully')
+        return response
 
 
 # class ProfileView(generic.TemplateView):
@@ -122,7 +130,6 @@ def update(request, pk):
         'form': form
     }
     return render(request, 'memoapp/day_form.html', context)    
-
 
 def delete(request, pk):
     day = get_object_or_404(Day, pk=pk)

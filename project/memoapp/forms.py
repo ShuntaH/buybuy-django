@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Textarea, TextInput
+from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
@@ -17,5 +17,6 @@ class DayCreateForm(ModelForm):
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Added'))
         self.fields['text'].widget.attrs.update({
-            'placeholder': 'This area is not required. And you can take some notes'
+            'placeholder': 'This area is not required.\
+             And you can take some notes'
         })
