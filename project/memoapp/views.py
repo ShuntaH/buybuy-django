@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -35,12 +34,10 @@ class AddView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy('memoapp:index')
 
     def form_valid(self, form):
+        messages.success(self.request, 'Your  desire was added successfully')
         form.instance.user = self.request.user
-        return super().form_valid(form)
-
-    def get(self, request, *args, **kwargs):
-        messages.success(self.request, 'Added successfully')
-        return super().get(request, *args, **kwargs)
+        response = super().form_valid(form)
+        return response
 
 
 class UpdateView(LoginRequiredMixin, generic.UpdateView):
@@ -50,20 +47,20 @@ class UpdateView(LoginRequiredMixin, generic.UpdateView):
     success_url = reverse_lazy('memoapp:index')
 
     def form_valid(self, form):
-        messages.success(
-            self.request, 'Your desire is updated')
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        messages.success(self.request, 'Your desire is updated')
+        return response
 
 
 class DeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Day
     login_url = '/buybuy/signin/'
-    # success_url = reverse_lazy('memoapp:index')
+    success_url = reverse_lazy('memoapp:index')
 
     def delete(self, request, *args, **kwargs):
+        response = super().delete(self)
         messages.success(self.request, 'Deleted successfully')
-        success_url = reverse_lazy('memoapp:index')
-        return HttpResponseRedirect(success_url)
+        return response
 
 
 class DetailView(LoginRequiredMixin, generic.DetailView):
@@ -77,8 +74,9 @@ class SignUpView(generic.CreateView):
     template_name = 'memoapp/signup.html'
 
     def post(self, request, *args, **kwargs):
+        response = super().post(self)
         messages.success(self.request, 'Your account was created successfully')
-        return super().post(request, *args, **kwargs)
+        return response
 
 
 # class ProfileView(generic.TemplateView):
@@ -132,7 +130,6 @@ def update(request, pk):
         'form': form
     }
     return render(request, 'memoapp/day_form.html', context)    
-
 
 def delete(request, pk):
     day = get_object_or_404(Day, pk=pk)
