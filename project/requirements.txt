@@ -1,5 +1,5 @@
 Cython==0.29.13
-Django==2.2.6
+Django==2.2.13
 django-crispy-forms==1.8.0
 entrypoints==0.3
 flake8==3.7.9
